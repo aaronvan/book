@@ -23,15 +23,6 @@ struct Connection {
     struct Database *db;
 };
 
-void die(const char *message) {
-    if (errno) {
-	perror(message);
-    } else {
-	printf("ERROR: %s\n", message);
-    }
-    exit(1);
-}
-
 void Address_print(struct Address *addr) {
     printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
@@ -138,6 +129,15 @@ void Database_list(struct Connection *conn) {
 	}
 }
 
+void die(const char *message) {
+    if (errno) {
+		perror(message);
+    } else {
+		printf("ERROR: %s\n", message);
+    }
+    exit(1);
+}
+
 int main(int argc, char *argv[]) {
 	if (argc < 3)
 		die("USAGE: ex17 <dbfile> <action> [action params]");
@@ -185,7 +185,6 @@ int main(int argc, char *argv[]) {
 		default:
 			die("Invalid action: c=create, g=get, s=set, d=del, l=list");
 	}
-	
 	Database_close(conn);
 	
     return EXIT_SUCCESS;
