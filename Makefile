@@ -5,4 +5,4 @@ all:
 	$(CC) $(CFLAGS) ex17.c -o fun
 
 clean:
-	rm -v fun
+	rm -v fun *.db
